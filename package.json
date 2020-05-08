@@ -1,0 +1,28 @@
+{
+  "name": "zephyr-cloud-docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "docz": "latest",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
+    "docz:serve": "docz build && docz serve",
+    "build": "docz build --dest dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bschulte/zephyr-cloud-docs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bschulte/zephyr-cloud-docs/issues"
+  },
+  "homepage": "https://github.com/bschulte/zephyr-cloud-docs#readme"
+}
