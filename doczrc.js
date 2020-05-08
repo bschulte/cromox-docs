@@ -1,4 +1,4 @@
 export default {
   dest: "/dist",
-  base: "/dist",
+  base: "/zephyr-cloud-docs/dist",
 };
