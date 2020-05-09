@@ -1,0 +1,46 @@
+---
+name: Relationships
+route: /relationships
+---
+
+# Relationships
+
+Lists don't have to exist in isolation. You can have lists be related to one another in the same way you
+would noramlly structure data in a database.
+
+You can create a list that will be created as a subdocument to another list with:
+
+```javascript
+zCloud.createSubList("SubThing", {
+  fields: {
+    title: {
+      fieldType: Text,
+    },
+  },
+});
+```
+
+**Important**
+A sublist that will be related to another list _must_ be declared before it.
+
+Once a sublist is declared, a list can then reference it with a particular type of field: `Relationship`
+This would look something like:
+
+```javascript
+  zCloud.createList("Thing", {
+    ...
+
+    fields: {
+      ...
+      subThings: {
+        fieldType: Relationship,
+        ref: "SubThing",
+        isMany: true,
+      },
+    },
+  });
+```
+
+You can use the `ref` attribute to specify the name of the field that will be created for the relationship.
+
+As with all fields, you can specify the `isMany` flag to dictate if the field should be an array of the type or not.

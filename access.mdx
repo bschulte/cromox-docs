@@ -1,0 +1,17 @@
+---
+name: Access Control
+route: "/access-control"
+---
+
+# Access Control
+
+Access control is allowed to be configured on the various operations on data of the app: create, read, update, and delete.
+You can either provide a function to do any type of check you want, or you can provide a list of user roles that are allowed to
+perform the action.
+
+If using a function to check access, that function is passed in two arguments:
+
+- user
+  - The currently authenticated user
+- result
+  - The doc(s) that are being affected by the operation.

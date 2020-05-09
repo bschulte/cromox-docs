@@ -1,0 +1,114 @@
+---
+name: Getting Started
+route: "/getting-started"
+---
+
+import { Link } from "docz";
+
+# Getting Started
+
+Getting started with Zephyr Cloud takes only a few steps to get working with multiple
+types of data with a whole suite of supporting infrastructure surrounding it.
+
+First, you need to instantiate the main cloud app object:
+
+The heart of lists are the fields that represent the data in the list. See the list documentation for more information.
+
+```javascript
+const zCloud = new ZephyrCloud({
+  dbString: "mongodb://localhost:27017/zephyr",
+  authStrategies: ["local"],
+});
+```
+
+The only required parameter you need to pass is the database string to connect to your MongoDB database.
+
+After you this is done, you can begin adding on lists to the application.
+
+```javascript
+zCloud.createList("Thing", {
+  fields: {
+    name: {
+      description: "Name of the best thing ever",
+      fieldType: Text,
+      unique: true,
+    },
+    count: {
+      fieldType: Float,
+    },
+  },
+});
+```
+
+The heart of lists are the fields that represent the data in the list. See the Fields documentation for more information.
+
+## Adding Lifecycle Hooks
+
+For each list we can hook into various parts of data reading/manipulation. Let's say we want to add a `console.log` statement
+before a document is created.
+
+```javascript
+zCloud.createList("Thing", {
+  fields: {
+    name: {
+      description: "Name of the best thing ever",
+      fieldType: Text,
+      unique: true,
+    },
+    count: {
+      fieldType: Float,
+    },
+  },
+  hooks: {
+    preChange: async ({ list, args, isNew }) => {
+      if (isNew) {
+        console.log("Pre create for list:", list.name, "Args:", args);
+      }
+    },
+  },
+});
+```
+
+The `preChange` hook passes in `isNew` which will represent if the operation is a create or update.
+
+## Adding Access Control
+
+Along with lifecycle hooks, we can define access controls for the operations or create, read, update, and delete.
+
+Say we want to only allow deletion for users who are admins:
+
+```javascript
+zCloud.createList("Thing", {
+  fields: {
+    name: {
+      description: "Name of the best thing ever",
+      fieldType: Text,
+      unique: true,
+    },
+    count: {
+      fieldType: Float,
+    },
+  },
+  hooks: {
+    preChange: async ({ list, args, isNew }) => {
+      if (isNew) {
+        console.log("Pre create for list:", list.name, "Args:", args);
+      }
+    },
+  },
+  access: {
+    delete: async ({ user }) => {
+      if (!user || !user.isAdmin) {
+        return false;
+      }
+
+      return true;
+    },
+  },
+});
+```
+
+The access functions provide the currently authenticated user as well as the document(s) that are being affected by the operation.
+
+Access control configs can also be provided an array of authorized roles (strings) to perform the action. In this case, a check is made
+to see if the currently authenticated user has any of the provided roles. If not, the operation isn't allowed to continue.

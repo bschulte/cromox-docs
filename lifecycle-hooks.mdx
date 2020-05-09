@@ -1,0 +1,21 @@
+---
+name: Lifecycle Hooks
+route: "/lifecycle-hooks"
+---
+
+# Lifecycle Hooks
+
+Lifecycle hooks are available for every list to customize how the app behaves at every point data being touched or read.
+
+- preChange
+  - Called before data is created or updated. Can modify the provided data before the create/update.
+- postChange
+  - Called after creation or update. Can modify the new/updated document.
+- validateInput
+  - Validates input before creation or update. Returns a `boolean` dictating if the input is valid or not. Is called after `preChange` in order to allow input modification before an error is thrown.
+- validateDelete
+  - Validates a delete operation before it is performed. Returns a `boolean` which if `false` will throw an error.
+- preDelete
+  - Called before a delete is performed.
+- postDelete
+  - Called after a delete is performed.

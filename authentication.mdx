@@ -1,0 +1,31 @@
+---
+name: Authentication
+route: /authentication
+---
+
+# Authentication
+
+Zephyr cloud allows for multiple types of authentication. By default, only local authentication is enabled. When creating the app,
+you can specify all the types of authentication you want to allow. The provided methods so far are:
+
+- Local
+- Google
+- Facebook
+- Github
+- Twitch
+
+When providing your choices to the app, it would look like:
+
+```javascript
+const zCloud = new ZephyrCloud({
+  ...
+  authStrategies: ["local", "google", "facebook", "github", "twitch"],
+});
+```
+
+The local authentication is provided via the GraphQL app, but the 3rd party methods are provided via standard HTTP routes.
+The routes are provided as:
+
+`/auth/${authType}`
+
+If a user doesn't exist with the given login methods ID, one is created by default.
