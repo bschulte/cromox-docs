@@ -8,5 +8,5 @@ export default {
     "Access Control",
   ],
   dest: "/dist",
-  base: "/zephyr-cloud-docs/dist/",
+  base: "/cromox-docs/dist/",
 };
