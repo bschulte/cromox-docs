@@ -13,7 +13,7 @@ First, you need to instantiate the main cloud app object:
 The heart of lists are the fields that represent the data in the list. See the list documentation for more information.
 
 ```javascript
-const zCloud = new Cromox({
+const cCloud = new Cromox({
   dbString: "mongodb://localhost:27017/cromox",
   authStrategies: ["local"],
 });
@@ -24,7 +24,7 @@ The only required parameter you need to pass is the database string to connect t
 After you this is done, you can begin adding on lists to the application.
 
 ```javascript
-zCloud.createList("Thing", {
+cCloud.createList("Thing", {
   fields: {
     name: {
       description: "Name of the best thing ever",
@@ -46,7 +46,7 @@ For each list we can hook into various parts of data reading/manipulation. Let's
 before a document is created.
 
 ```javascript
-zCloud.createList("Thing", {
+cCloud.createList("Thing", {
   fields: {
     name: {
       description: "Name of the best thing ever",
@@ -76,7 +76,7 @@ Along with lifecycle hooks, we can define access controls for the operations or 
 Say we want to only allow deletion for users who are admins:
 
 ```javascript
-zCloud.createList("Thing", {
+cCloud.createList("Thing", {
   fields: {
     name: {
       description: "Name of the best thing ever",
